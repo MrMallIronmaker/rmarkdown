@@ -31,7 +31,12 @@ paged_table_type_sum <- function(x) {
   type_sum(x)
 }
 
+#paged_table_obj_sum <- function(x) {
+#  UseMethod()
+#}
+
 paged_table_obj_sum <- function(x) {
+  print("paged_table_obj_sum")
   big_mark <- function(x, ...) {
     mark <- if (identical(getOption("OutDec"), ",")) "." else ","
     formatC(x, big.mark = mark, ...)
@@ -93,6 +98,7 @@ paged_table_option <- function(option, options, default = NULL) {
 
 #' @import methods
 paged_table_html <- function(x, options = NULL) {
+  print("paged_table_html")
   addRowNames = paged_table_option("rownames.print", options)
   addRowNames <- if (is.null(addRowNames)) (.row_names_info(x, type = 1) > 0) else addRowNames
 
@@ -209,6 +215,7 @@ paged_table_html <- function(x, options = NULL) {
 #'
 #' @export
 paged_table <- function(x, options = NULL) {
+  print("paged_table")
   if (!is.data.frame(x)) {
     stop("Only data frames can be used to create a paged_table.")
   }
@@ -219,6 +226,7 @@ paged_table <- function(x, options = NULL) {
 }
 
 print.paged_df <- function(x) {
+  print("print.paged_df")
   knitr::asis_output(
     paged_table_html(x, options = attr(x, "options")),
     meta = list(
